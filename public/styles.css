@@ -1,0 +1,23 @@
+body {
+  background-color: #e1d89f;
+}
+
+p {
+  margin: .25rem;
+}
+
+.bg-entry {
+  background-color: #d89216;
+}
+
+.bg-header {
+  background-color: #2c061f
+}
+
+.rounded-square {
+  border-radius: 25px;
+}
+
+.text-header {
+  color: #d89216;
+}

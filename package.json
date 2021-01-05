@@ -10,6 +10,7 @@
     "eject": "react-scripts eject"
   },
   "author": "",
+  "proxy": "http://localhost:5000/",
   "license": "ISC",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",

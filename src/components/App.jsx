@@ -1,9 +1,37 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import Header from "./Header"
+import RecordEntry from "./RecordEntry";
 
 function App() {
+  const [recordsList, setRecordsList] = useState([]);
+
+  useEffect(() => {
+    fetch("api/records")
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      setRecordsList(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }, [])
+
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="text-center m-0">
+      <Header />
+
+      {recordsList.map(entry => {
+        return <RecordEntry
+        key={entry.id}
+        repone={entry.repone}
+        exone={entry.exone}
+        reptwo={entry.reptwo}
+        extwo={entry.extwo}
+        score={entry.score} />
+      })}
+
     </div>
   )
 }
