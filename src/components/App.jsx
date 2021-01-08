@@ -22,16 +22,15 @@ function App() {
     <div className="text-center m-0">
       <Header />
 
-      {recordsList.map(entry => {
+      {recordsList.map((entry, index) => {
         return <RecordEntry
-        key={entry.id}
+        key={index}
         repone={entry.repone}
         exone={entry.exone}
         reptwo={entry.reptwo}
         extwo={entry.extwo}
         score={entry.score} />
       })}
-
     </div>
   )
 }
