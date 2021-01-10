@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const mysqlConnection = mysql.createConnection({
@@ -27,10 +28,11 @@ app.get("/api/records/", (req, res) => {
   })
 })
 
+//Make id timestamp and sort by that
 app.post("/api/records/", (req, res) => {
   const newRecord = req.body;
 
-  mysqlConnection.query("INSERT INTO records VALUES (?, ?, ?, ?, ?, ?)", [newRecord.id, newRecord.exone, newRecord.extwo, newRecord.repone, newRecord.reptwo, newRecord.score], (err, rows, field) => {
+  mysqlConnection.query("INSERT INTO records VALUES (?, ?, ?, ?, ?, ?)", [uuidv4(), newRecord.exone, newRecord.extwo, newRecord.repone, newRecord.reptwo, newRecord.score], (err, rows, field) => {
     if(!err) {
         res.send("Record added");
     } else {
