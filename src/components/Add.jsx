@@ -15,7 +15,7 @@ icon: {
 }
 });
 
-function Add() {
+function Add(props) {
   const classes = useStyles();
   const [newRecord, setNewRecord] = useState({
     exone: "",
@@ -82,27 +82,18 @@ function Add() {
     setVisibility(prevValue => !prevValue);
   }
 
-  // Make the list update after submitted
-  function submitRecord (event) {
-    fetch("http://localhost:3000/api/records", {
-      method: "POST",
-      headers: {
-      'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newRecord)
-    })
-
+  function addRecord(event) {
+    props.onAdd(newRecord);
     event.preventDefault();
 
+    setVisibility(false);
     setNewRecord({
       exone: "",
       extwo: "",
       repone: "",
       reptwo: "",
       score: ""
-    });
-
-    setVisibility(false);
+    })
   }
 
   return (<div>
@@ -122,7 +113,7 @@ function Add() {
       </div>
       <div className="row p-2">
         <input onChange={onChange} className="rounded-square mr-2" placeholder="Score 00:00:00" value={newRecord.score} name="score"/>
-        <button onClick={submitRecord} className="rounded-square w-25 bg-header text-header">Submit</button>
+        <button onClick={addRecord} className="rounded-square w-25 bg-header text-header">Submit</button>
       </div>
     </form>
     }

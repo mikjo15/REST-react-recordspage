@@ -34,7 +34,9 @@ app.post("/api/records/", (req, res) => {
 
   mysqlConnection.query("INSERT INTO records VALUES (?, ?, ?, ?, ?, ?)", [uuidv4(), newRecord.exone, newRecord.extwo, newRecord.repone, newRecord.reptwo, newRecord.score], (err, rows, field) => {
     if(!err) {
-        res.send("Record added");
+      mysqlConnection.query("SELECT * FROM records", (err, rows, field) => {
+        res.send(rows);
+      })
     } else {
       console.log(err);
     }
