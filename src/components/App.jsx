@@ -37,6 +37,22 @@ function App() {
     })
   }
 
+  function deleteRecord(deletedRecord) {
+    const url = "http://localhost:3000/api/records/" + deletedRecord;
+
+    fetch(url, {
+      method: "DELETE"
+    }).then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      setRecordsList(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
     <div className="text-center m-0">
       <Header />
@@ -49,7 +65,8 @@ function App() {
         exone={entry.exone}
         reptwo={entry.reptwo}
         extwo={entry.extwo}
-        score={entry.score}/>
+        score={entry.score}
+        onDelete={deleteRecord}/>
       })}
     </div>
   )

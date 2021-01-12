@@ -75,6 +75,33 @@ app.get("/api/records/:exercise", (req, res) => {
   })
 })
 
+// Modify so record is only deleted if both exersices match
+app.delete("/api/records/:exercise", (req, res) => {
+  const searchedExercise = req.params.exercise;
+
+  mysqlConnection.query("DELETE FROM records WHERE exone = ?", [searchedExercise], (err, rows, field) => {
+    if(rows.length === 0) {
+      mysqlConnection.query("DELETE FROM records WHERE extwo = ?", [searchedExercise], (err2, rows2, field2) => {
+        if (rows2.length === 0) {
+          res.send("No such record found");
+        } else if (!err2) {
+          mysqlConnection.query("SELECT * FROM records", (err, allRows, field) => {
+            res.send(allRows);
+          })
+        } else {
+          res.send(err2)
+        }
+      })
+    } else if (!err) {
+      mysqlConnection.query("SELECT * FROM records", (err, allRows, field) => {
+        res.send(allRows);
+      })
+    } else {
+      res.send(err)
+    }
+  })
+})
+
 app.put("/api/records/:exercise", (req, res) => {
   const ex = req.body;
   const exercise = req.params.exercise;

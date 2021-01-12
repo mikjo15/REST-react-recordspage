@@ -8,7 +8,8 @@ root: {
   background: "#2c061f",
   position: "fixed",
   right: "30px",
-  bottom: "30px"
+  bottom: "30px",
+  zIndex: "1"
 },
 icon: {
   color: "#d89216"
@@ -81,7 +82,6 @@ function Add(props) {
   function addClicked() {
     setVisibility(prevValue => !prevValue);
   }
-
   function addRecord(event) {
     props.onAdd(newRecord);
     event.preventDefault();
