@@ -108,7 +108,9 @@ app.put("/api/records/:exercise", (req, res) => {
   var sql = `SET @Exone = ?; SET @Repone = ?; SET @Reptwo = ?; SET @Score = ?; CALL ExerciseEdit(@Exone, @Repone, @Reptwo, @Score);`
   mysqlConnection.query(sql, [exercise, ex.repone, ex.reptwo, ex.score], (err, rows, field) => {
     if (!err) {
-      res.send("Updated successfully!")
+      mysqlConnection.query("SELECT * FROM records", (err, allRows, field) => {
+        res.send(allRows);
+      })
     } else {
       res.send(err);
     }

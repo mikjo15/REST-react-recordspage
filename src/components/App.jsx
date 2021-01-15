@@ -7,6 +7,7 @@ import RecordForm from "./RecordForm";
 function App() {
   const [recordsList, setRecordsList] = useState([]);
   const [visibillity, setVisibillity] = useState(false);
+  const [onSubmit, setOnSubmit] = useState(() => submitRecord);
   const [editedRecord, setEditedRecord] = useState({
     exone: "",
     extwo: "",
@@ -52,6 +53,28 @@ function App() {
     changeVisibillity();
   }
 
+  function submitEdit(record) {
+    const url = "http://localhost:3000/api/records/" + record.exone;
+
+    fetch(url, {
+      method: "PUT",
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(record)
+    }).then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      setRecordsList(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
+    changeVisibillity();
+  }
+
   function deleteRecord(deletedRecord) {
     const url = "http://localhost:3000/api/records/" + deletedRecord;
 
@@ -70,13 +93,14 @@ function App() {
 
   function editRecord(editRecord) {
     changeVisibillity()
+    setOnSubmit(() => submitEdit);
     setEditedRecord(editRecord);
   }
 
   return (
     <div className="text-center m-0">
       <Header />
-      {visibillity && <RecordForm onAdd={submitRecord} edit={editedRecord}/>}
+      {visibillity && <RecordForm onAdd={onSubmit} edit={editedRecord}/>}
       <Add onAdd={changeVisibillity}/>
 
       {recordsList.map((entry, index) => {
