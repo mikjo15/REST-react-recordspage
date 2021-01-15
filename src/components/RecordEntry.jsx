@@ -27,6 +27,13 @@ icon: {
 
 // Make the score another format - seconds:milliseconds
 function RecordEntry(props) {
+  const Entry = {
+    repone: props.repone,
+    exone: props.exone,
+    reptwo: props.reptwo,
+    extwo: props.extwo,
+    score: props.score
+  }
 
   function onDelete() {
     const deleteItem = props.exone;
@@ -35,7 +42,7 @@ function RecordEntry(props) {
   }
 
   function onEdit() {
-    
+    props.onEdit(Entry);
   }
 
   const classes = useStyles();

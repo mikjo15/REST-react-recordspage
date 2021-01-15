@@ -2,9 +2,18 @@ import React, {useState, useEffect} from "react";
 import Header from "./Header"
 import Add from "./Add";
 import RecordEntry from "./RecordEntry";
+import RecordForm from "./RecordForm";
 
 function App() {
   const [recordsList, setRecordsList] = useState([]);
+  const [visibillity, setVisibillity] = useState(false);
+  const [editedRecord, setEditedRecord] = useState({
+    exone: "",
+    extwo: "",
+    repone: "",
+    reptwo: "",
+    score: ""
+  });
 
   useEffect(() => {
     fetch("api/records")
@@ -18,6 +27,10 @@ function App() {
       console.log(err);
     })
   }, [])
+
+  function changeVisibillity() {
+    setVisibillity(prevValue => !prevValue);
+  }
 
   function submitRecord(newRecord) {
     fetch("http://localhost:3000/api/records", {
@@ -35,6 +48,8 @@ function App() {
     .catch((err) => {
       console.log(err);
     })
+
+    changeVisibillity();
   }
 
   function deleteRecord(deletedRecord) {
@@ -53,10 +68,16 @@ function App() {
     })
   }
 
+  function editRecord(editRecord) {
+    changeVisibillity()
+    setEditedRecord(editRecord);
+  }
+
   return (
     <div className="text-center m-0">
       <Header />
-      <Add onAdd={submitRecord}/>
+      {visibillity && <RecordForm onAdd={submitRecord} edit={editedRecord}/>}
+      <Add onAdd={changeVisibillity}/>
 
       {recordsList.map((entry, index) => {
         return <RecordEntry
@@ -66,7 +87,8 @@ function App() {
         reptwo={entry.reptwo}
         extwo={entry.extwo}
         score={entry.score}
-        onDelete={deleteRecord}/>
+        onDelete={deleteRecord}
+        onEdit={editRecord}/>
       })}
     </div>
   )
