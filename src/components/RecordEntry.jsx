@@ -7,18 +7,16 @@ const useStyles = makeStyles({
 delete: {
   backgroundColor: "#d89216",
   border: "none",
-  position: "relative",
-  bottom: "7.2rem",
-  left: "20rem",
-  padding: "0"
+  position: "absolute",
+  top: "1.5rem",
+  right: "1.5rem"
 },
 edit: {
   backgroundColor: "#d89216",
   border: "none",
-  position: "relative",
-  bottom: "7.2rem",
-  left: "15rem",
-  padding: "0"
+  position: "absolute",
+  top: "1.5rem",
+  right: "4rem"
 },
 icon: {
   color: "#2c061f",
@@ -47,10 +45,11 @@ function RecordEntry(props) {
 
   const classes = useStyles();
   return (
-    <div className="bg-entry m-4 py-3 px-5 rounded-square text-left">
-      <h5>{props.repone} {props.exone}</h5>
-      <h5>{props.reptwo} {props.extwo}</h5>
-      <h1>{props.score}</h1>
+    <div className="card m-4 mx-md-auto py-3 px-5 text-left">
+      <h4 className="small-text">{props.repone} {props.exone}</h4>
+      <h4 className="small-text">{props.reptwo} {props.extwo}</h4>
+      <h1 className="large-text">{props.score}</h1>
+
       <button className={classes.delete} onClick={onDelete}>
       <DeleteIcon fontSize="large"/>
       </button>
