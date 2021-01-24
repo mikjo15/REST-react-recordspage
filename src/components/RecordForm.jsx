@@ -76,7 +76,7 @@ function RecordForm(props) {
   }
 
   return (
-    <form className="bg-entry m-4 py-3 px-5 rounded-square text-left form-group">
+    <form className="card m-4 py-3 px-5 text-left form-group">
       <div className="row p-2">
         <input onChange={onChange} className="rounded-square mr-2" placeholder="Exercise one" value={newRecord.exone} name="exone"/>
         <input onChange={onChange} className="rounded-square w-25" placeholder="Reps" value={newRecord.repone} name="repone"/>

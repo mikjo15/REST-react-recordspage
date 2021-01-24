@@ -101,7 +101,7 @@ function App() {
     <div className="text-center m-0">
       <Header />
       {visibillity && <RecordForm onAdd={onSubmit} edit={editedRecord}/>}
-      <Add onAdd={changeVisibillity}/>
+      <Add onAdd={editRecord}/>
 
       {recordsList.map((entry, index) => {
         return <RecordEntry

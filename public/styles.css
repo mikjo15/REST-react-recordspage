@@ -11,22 +11,26 @@ p {
 }
 
 .card {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background-color: #d89216;
-  position: relative;
   border-radius: 25px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  position: relative;
 }
 
 .large-text {
   font-size: 300%;
 }
 
-.text-header {
-  color: #d89216;
+.rounded-square {
+  border-radius: 15px;
 }
 
 .small-text {
   font-size: 150%;
+}
+
+.text-header {
+  color: #d89216;
 }
 
 @media only screen and (min-width: 768px) {
